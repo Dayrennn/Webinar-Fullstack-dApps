@@ -1,29 +1,42 @@
-import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@6.10.0/+esm";
+const connectBtn = document.getElementById("connectBtn");
+const statusEl = document.getElementById("status");
+const addressEl = document.getElementById("address");
+const networkEl = document.getElementById("network");
+const balanceEl = document.getElementById("balance");
 
-const CONTRACT_ADDRESS = "0x1234....";
-const ABI = ["function count() view returns (uint256)", "function increment()"];
+connectBtn.addEventListener("click", async () => {
+  if (window.ethereum) {
+    try {
+      // Minta akses wallet
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      const account = accounts[0];
+      addressEl.innerText = account;
+      statusEl.innerText = "Connected";
 
-let signer;
-let contract;
+      // Dapatkan chainId
+      const chainId = await window.ethereum.request({ method: "eth_chainId" });
+      if (chainId === "0xa869") {
+        // Avalanche Fuji
+        networkEl.innerText = "Avalanche Fuji Testnet";
+      } else {
+        networkEl.innerText = `Wrong Network (ChainId: ${chainId})`;
+      }
 
-document.getElementById("connect").onclick = async () => {
-  const provider = new ethers.BrowserProvider(window.ethereum);
-  await provider.send("eth_requestAccounts", []);
-  signer = await provider.getSigner();
-
-  document.getElementById("address").innerText = await signer.getAddress();
-
-  contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
-  updateCount();
-};
-
-document.getElementById("increment").onclick = async () => {
-  const tx = await contract.increment();
-  await tx.wait();
-  updateCount();
-};
-
-async function updateCount() {
-  const count = await contract.count();
-  document.getElementById("count").innerText = count.toString();
-}
+      // Dapatkan balance AVAX
+      const balanceWei = await window.ethereum.request({
+        method: "eth_getBalance",
+        params: [account, "latest"],
+      });
+      const balance = parseFloat(parseInt(balanceWei, 16) / 1e18).toFixed(4);
+      balanceEl.innerText = balance;
+    } catch (err) {
+      console.error(err);
+      statusEl.innerText = "User rejected request";
+    }
+  } else {
+    statusEl.innerText = "Core Wallet not detected";
+    alert("Please install Core Wallet extension!");
+  }
+});

@@ -6,7 +6,8 @@ dotenv.config();
 const config: HardhatUserConfig = {
   solidity: "0.8.28",
   networks: {
-    snowtrace: {
+    fuji: {
+      // Ganti dari 'snowtrace' jadi 'fuji'
       url: "https://api.avax-test.network/ext/bc/C/rpc",
       accounts: [process.env.PRIVATE_KEY || ""],
     },
@@ -15,7 +16,7 @@ const config: HardhatUserConfig = {
     apiKey: { snowtrace: process.env.SNOWTRACE_API_KEY || "" },
     customChains: [
       {
-        network: "snowtrace",
+        network: "fuji", // Ganti juga di customChains
         chainId: 43113,
         urls: {
           apiURL: "https://api.snowtrace.io/api",
