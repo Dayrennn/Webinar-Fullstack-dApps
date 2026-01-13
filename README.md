@@ -1,7 +1,7 @@
-# 🚀 Avalanche Full Stack dApp – Short Course at Pamulang University
+# Avalanche Full Stack dApp – Short Course at Pamulang University
 
 Hi! Saya peserta dari **Avalanche Full Stack dApp Short Course** di Pamulang University.  
-Short course ini membantu saya **membangun Full Stack dApp sederhana di jaringan Avalanche** dari nol hingga deployment, menggunakan **1 template project yang sama selama 5 hari**.
+Short course ini membantu saya membangun Full Stack dApp sederhana di jaringan Avalanche dari nol hingga deployment, menggunakan 1 template project yang sama selama 5 hari.
 
 Course ini cocok untuk saya karena saya ingin:
 
@@ -11,7 +11,7 @@ Course ini cocok untuk saya karena saya ingin:
 
 ---
 
-## 🎯 Apa yang Saya Pelajari
+# Apa yang Saya Pelajari
 
 Selama mengikuti course, saya belajar untuk:
 
@@ -24,9 +24,9 @@ Selama mengikuti course, saya belajar untuk:
 
 ---
 
-## 🧩 Studi Kasus yang Saya Kerjakan
+# Studi Kasus yang Saya Kerjakan
 
-**Avalanche Simple Full Stack dApp** dengan fitur utama:
+Avalanche Simple Full Stack dApp dengan fitur utama:
 
 - Connect wallet (Core Wallet)
 - Interaksi smart contract (read & write)
@@ -35,9 +35,9 @@ Selama mengikuti course, saya belajar untuk:
 
 ---
 
-## 🧱 Tech Stack yang Saya Gunakan
+# Tech Stack yang Saya Gunakan
 
-**Blockchain**
+Blockchain
 
 - Avalanche C-Chain
 - Solidity
@@ -45,19 +45,19 @@ Selama mengikuti course, saya belajar untuk:
 - Viem
 - Wagmi
 
-**Frontend**
+Frontend
 
 - Next.js (App Router)
 - Tailwind CSS
 - TypeScript
 
-**Backend**
+Backend
 
 - NestJS
 - PostgreSQL (data transaksi)
 - MongoDB (event/log)
 
-**Deployment**
+Deployment
 
 - Avalanche Fuji Testnet
 - Vercel (Frontend)
@@ -65,7 +65,7 @@ Selama mengikuti course, saya belajar untuk:
 
 ---
 
-## 📁 Struktur Repository
+# Struktur Repository
 
 ```bash
 avalanche-fullstack-dapp/
