@@ -1,3 +1,0 @@
-contract address 0x188c917a29440902072B9a8B7edbDeaBe649e9FB
-
-untuk day 3
