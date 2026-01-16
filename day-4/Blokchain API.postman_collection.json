@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "79c48eca-d325-4da5-845c-8ef85c9ca5c6",
+		"name": "Blokchain API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50909127",
+		"_collection_link": "https://raflyramandha789-6737882.postman.co/workspace/Rafly-Ramandha-Kusuma's-Workspa~8cc0b96f-8c2c-49fa-83e0-697b27bd93e1/collection/50909127-79c48eca-d325-4da5-845c-8ef85c9ca5c6?action=share&source=collection_link&creator=50909127"
+	},
+	"item": [
+		{
+			"name": "events",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/blockchain/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blockchain",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "value",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		}
+	]
+}
