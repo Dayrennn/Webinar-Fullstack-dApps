@@ -36,6 +36,7 @@ Backend berfungsi sebagai:
 
 ## ⚙️ Struktur Folder
 
+```bash
 day-4/
 └── backend/
 │ ├── blockchain.module.ts
@@ -61,3 +62,5 @@ day-4/
 ├── Blockchain API.postman_collection.json
 ├── tsconfig.json
 └── nest-cli.json
+
+```
