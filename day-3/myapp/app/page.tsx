@@ -85,7 +85,7 @@ export default function Page() {
       <div className="w-full max-w-md border border-gray-800 rounded-2xl p-8 bg-zinc-900 shadow-2xl space-y-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-            Avalanche dApp Day 3
+            Avalanche dApp
           </h1>
           <p className="text-gray-500 text-sm">Simple Storage Interaction</p>
         </div>

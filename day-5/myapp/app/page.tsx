@@ -1,17 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// Di bagian import page.tsx, ganti menjadi:
 import {
   useAccount,
   useConnect,
   useDisconnect,
-  useSwitchNetwork,
-  useReadContract, // Ganti dari useContractRead
-  useWriteContract, // Ganti dari useContractWrite
-  useWaitForTransactionReceipt, // Ganti dari useWaitForTransaction
+  useNetwork,
+  useReadContract,
+  useWriteContract,
+  useWaitForTransactionReceipt,
 } from "wagmi";
-import { injected } from "wagmi/connectors"; // Ganti dari InjectedConnector
+import { injected } from "wagmi/connectors";
 import { avalancheFuji } from "wagmi/chains";
 
 const CONTRACT_ADDRESS = "0x815Eb8fB6606fae56a1c9c8d31A13fCce703787c";
@@ -36,9 +35,10 @@ export default function Page() {
   const { address, isConnected } = useAccount();
   const { connect } = useConnect();
   const { disconnect } = useDisconnect();
+  const { chain, chains, switchNetwork } = useNetwork();
+
   const [inputValue, setInputValue] = useState("");
 
-  // Wagmi v2: useReadContract
   const { data: value, refetch } = useReadContract({
     address: CONTRACT_ADDRESS,
     abi: SIMPLE_STORAGE_ABI,
@@ -46,10 +46,8 @@ export default function Page() {
     chainId: avalancheFuji.id,
   });
 
-  // Wagmi v2: useWriteContract
   const { data: hash, writeContract } = useWriteContract();
 
-  // Wagmi v2: useWaitForTransactionReceipt
   const { isLoading: isPending, isSuccess } = useWaitForTransactionReceipt({
     hash,
   });
@@ -71,22 +69,52 @@ export default function Page() {
     });
   };
 
-  // Ganti bagian return di page.tsx dengan yang ini:
   return (
-    <main>
+    <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <h1>Avalanche Simple Storage dApp</h1>
+
       {!isConnected ? (
         <button
-          className="connect-button"
           onClick={() => connect({ connector: injected() })}
+          style={{
+            padding: "0.5rem 1rem",
+            backgroundColor: "#4a90e2",
+            color: "#fff",
+            borderRadius: "0.3rem",
+          }}
         >
           Connect Wallet
         </button>
       ) : (
-        <div className="connection-status">
+        <div style={{ marginBottom: "1rem" }}>
           <p>Connected to Avalanche Fuji</p>
-          <p className="connected-address">{address}</p>
-          <button className="disconnect-button" onClick={() => disconnect()}>
+          <p>Address: {address}</p>
+          <p>Network: {chain?.name}</p>
+
+          {chains.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => switchNetwork?.(c.id)}
+              style={{
+                marginRight: "0.5rem",
+                padding: "0.3rem 0.6rem",
+                borderRadius: "0.2rem",
+              }}
+            >
+              Switch to {c.name}
+            </button>
+          ))}
+
+          <button
+            onClick={() => disconnect()}
+            style={{
+              marginLeft: "1rem",
+              padding: "0.5rem 1rem",
+              backgroundColor: "#e74c3c",
+              color: "#fff",
+              borderRadius: "0.3rem",
+            }}
+          >
             Disconnect Wallet
           </button>
         </div>
@@ -94,32 +122,47 @@ export default function Page() {
 
       <div>
         <p>Current Stored Value:</p>
-        <div className="storage-value">{value?.toString() ?? "0"}</div>
+        <div style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+          {value?.toString() ?? "0"}
+        </div>
 
         <input
           type="number"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Enter new value"
+          style={{
+            padding: "0.5rem",
+            marginRight: "0.5rem",
+            borderRadius: "0.3rem",
+            border: "1px solid #ccc",
+          }}
         />
 
         <button
           onClick={handleSetValue}
           disabled={!isConnected || isPending}
-          className={isPending ? "pending" : ""}
+          style={{
+            padding: "0.5rem 1rem",
+            backgroundColor: isPending ? "#f1c40f" : "#2ecc71",
+            color: "#fff",
+            borderRadius: "0.3rem",
+          }}
         >
           {isPending ? "Transaction Pending..." : "Update Value"}
         </button>
 
         {hash && (
-          <a
-            className="tx-link"
-            href={`https://testnet.snowtrace.io/tx/${hash}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            View Transaction on Snowtrace
-          </a>
+          <div style={{ marginTop: "1rem" }}>
+            <a
+              href={`https://testnet.snowtrace.io/tx/${hash}`}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "#4a90e2" }}
+            >
+              View Transaction on Snowtrace
+            </a>
+          </div>
         )}
       </div>
     </main>

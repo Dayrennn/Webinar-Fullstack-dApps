@@ -12,6 +12,6 @@ export class BlockchainController {
 
   @Get('events')
   async getEvents() {
-    return this.blockchainService.getValueUpdatedEvents(); //
+    return this.blockchainService.getValueUpdatedEvents();
   }
 }
